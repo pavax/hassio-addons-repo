@@ -66,11 +66,7 @@ Example add-on configuration:
     "enabled": "true",
     "whitelist": [],
     "blacklist": [
-      "local_backup_s3",
-      "15ef4d2f_esphome",
-      "a0d7b954_sqlite-web",
-      "core_mosquitto",
-      "ae6e943c_remote_api"
+      "15ef4d2f_esphome"
     ]
   }
 }

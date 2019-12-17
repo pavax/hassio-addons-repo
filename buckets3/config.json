@@ -1,6 +1,6 @@
 {
   "name": "Backup S3",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "slug": "backup_s3",
   "description": "Backup config to S3 bucket",
   "url": "https://github.com/pavax/hassio-addons-repo",
@@ -19,7 +19,12 @@
     "bucketname": "",
     "maxSnapshots": "3",
     "schedule": "0 4 * * *",
-    "run_backup_at_startup": false
+    "run_backup_at_startup": false,
+    "backup_addons": {
+      "enabled": "true",
+      "whitelist": [],
+      "blacklist": []
+    }
   },
   "schema": {
     "awskey": "str",
