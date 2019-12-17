@@ -1,6 +1,10 @@
 # Hassio Addon for Backing up to S3 Bucket
 
-Add-on for creating and uploading hass.io snapshots to AWS S3.
+Add-on for creating and uploading hass.io snapshots to AWS S3. 
+
+This addon is essentially a simple mixture of the following projects
+ * https://github.com/marcelveldt/hassio-addons-repo
+ * https://github.com/rrostt/hassio-backup-s3
 
 ## Installation
 
