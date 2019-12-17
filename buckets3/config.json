@@ -1,8 +1,9 @@
 {
   "name": "Backup S3",
-  "version": "1.0.10",
+  "version": "0.0.10",
   "slug": "backup_s3",
   "description": "Backup config to S3 bucket",
+  "url": "https://github.com/pavax/hassio-addons-repo",
   "arch": [
     "armhf",
     "armv7",
