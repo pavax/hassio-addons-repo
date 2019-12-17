@@ -1,0 +1,45 @@
+{
+  "name": "Backup S3",
+  "version": "1.0.10",
+  "slug": "backup_s3",
+  "description": "Backup config to S3 bucket",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "startup": "before",
+  "boot": "auto",
+  "options": {
+    "awskey": "",
+    "awssecret": "",
+    "bucketname": "",
+    "maxSnapshots": "3",
+    "schedule": "0 4 * * *",
+    "run_backup_at_startup": false
+  },
+  "schema": {
+    "awskey": "str",
+    "awssecret": "str",
+    "bucketname": "str",
+    "maxSnapshots": "int(0,)",
+    "schedule": "str",
+    "run_backup_at_startup": "bool",
+    "backup_addons": {
+      "enabled": "bool",
+      "whitelist": [
+        "str"
+      ],
+      "blacklist": [
+        "str"
+      ]
+    }
+  },
+  "map": [
+    "backup:ro"
+  ],
+  "hassio_api": true,
+  "hassio_role": "manager"
+}
