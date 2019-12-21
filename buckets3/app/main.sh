@@ -7,7 +7,7 @@ MAX_SNAPSHOTS_TO_KEEP=$(bashio::config 'maxSnapshots')
 
 function purge_hassio_snapshots() {
   bashio::log.info "About to purge old snapshots"
-  SNAPSHOTS=$(bashio::api.hassio GET /snapshots false | jq -c '.snapshots')
+  SNAPSHOTS=$(bashio::api.hassio GET /snapshots false | jq -c '.snapshots|sort_by(.date)')
   readarray -t SNAPSHOTS < <(echo $SNAPSHOTS | jq -c '.[]')
   bashio::log.info "Found "${#SNAPSHOTS[@]}" Snapshots"
   NUM_TO_DELETE=$((${#SNAPSHOTS[@]} - $MAX_SNAPSHOTS_TO_KEEP))
@@ -17,7 +17,10 @@ function purge_hassio_snapshots() {
   fi
   bashio::log.info "Delete "$NUM_TO_DELETE" Snapshots"
   for i in $(seq 1 $NUM_TO_DELETE); do
-    SLUG=$(bashio::jq "${SNAPSHOTS[i - 1]}" '.slug')
+    SNAPSHOT="${SNAPSHOTS[i - 1]}"
+    SLUG=$(bashio::jq "$SNAPSHOT" '.slug')
+    NAME=$(bashio::jq "$SNAPSHOT" '.name')
+    bashio::log.info "About to delete Snapshot: $NAME (ID: $SLUG) "
     bashio::api.hassio POST "/snapshots/${SLUG}/remove" false
   done
 }
