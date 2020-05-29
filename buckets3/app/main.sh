@@ -7,7 +7,7 @@ MAX_SNAPSHOTS_TO_KEEP=$(bashio::config 'maxSnapshots')
 
 function purge_hassio_snapshots() {
   bashio::log.info "About to purge old snapshots"
-  SNAPSHOTS=$(bashio::api.hassio GET /snapshots false | jq -c '.snapshots|sort_by(.date)')
+  SNAPSHOTS=$(bashio::api.supervisor GET /snapshots false | jq -c '.snapshots|sort_by(.date)')
   readarray -t SNAPSHOTS < <(echo $SNAPSHOTS | jq -c '.[]')
   bashio::log.info "Found "${#SNAPSHOTS[@]}" Snapshots"
   NUM_TO_DELETE=$((${#SNAPSHOTS[@]} - $MAX_SNAPSHOTS_TO_KEEP))
@@ -21,7 +21,7 @@ function purge_hassio_snapshots() {
     SLUG=$(bashio::jq "$SNAPSHOT" '.slug')
     NAME=$(bashio::jq "$SNAPSHOT" '.name')
     bashio::log.info "About to delete Snapshot: $NAME (ID: $SLUG) "
-    bashio::api.hassio POST "/snapshots/${SLUG}/remove" false
+    bashio::api.supervisor POST "/snapshots/${SLUG}/remove" false
   done
 }
 
@@ -65,7 +65,7 @@ function create_hassio_snapshot() {
 
   SNAPSHOT_OPTIONS=$(printf '{"name":"%s", "addons":%s, "folders":%s}' "$NAME" "$BACKUP_ADDONS" "$BACKUP_FOLDERS")
   bashio::log.info "snapshot options:" "$SNAPSHOT_OPTIONS"
-  bashio::api.hassio POST /snapshots/new/partial "$SNAPSHOT_OPTIONS"
+  bashio::api.supervisor POST /snapshots/new/partial "$SNAPSHOT_OPTIONS"
 }
 
 function aws_sync() {
