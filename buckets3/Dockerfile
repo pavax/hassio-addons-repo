@@ -1,10 +1,9 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM homeassistant/aarch64-base:latest
 
 ENV LANG C.UTF-8
 
 RUN apk update && apk add \
-	python3 \
+	python3 py-pip \
 	&& rm -rf /var/cache/apk/* \
   && pip3 install pip --upgrade \
   && pip3 install awscli
