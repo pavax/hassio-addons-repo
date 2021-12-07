@@ -1,6 +1,6 @@
 {
   "name": "Backup S3",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "slug": "backup_s3",
   "description": "Backup config to S3 bucket",
   "url": "https://github.com/pavax/hassio-addons-repo",
@@ -11,8 +11,6 @@
     "amd64",
     "i386"
   ],
-  "startup": "before",
-  "boot": "auto",
   "options": {
     "awskey": "",
     "awssecret": "",
